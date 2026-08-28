@@ -32,6 +32,7 @@ Canada** (currently Anthropic in the United States).
 | Discord **guild (server) ID** | One settings blob per server |
 | Per-server **settings** (JSON) | Feature flags, access roles, vanity tiers, filter lists, panel templates, log-channel IDs, wardrobe hub, temp-voice hub, and similar configuration the owner set in `/admin` |
 | Discord **user IDs** tied to vanity ownership, shares, role snapshots, economy balances, poker escrow, casino round IDs, temp-voice rooms/preferences, wardrobe sessions, capacity grants | To make those features work |
+| **Wardrobe meter** | How many paid sketches and icons a server has used this calendar month. Guild ID and counts only — not the descriptions. |
 | **Wardrobe icon bytes** | Raw image data (`BYTEA`) for the previous vanity badge so a rejected try-on can restore it. Generated icons, when that phase is on, are the same kind of data. |
 | **Voice channel joins/leaves** | BARNEY watches voice-state changes in real time so temporary rooms can be created and torn down. It does not use Presence intent (online/offline/status). |
 | **Message content**, only when a feature that needs it is on | Word filter, channel rules, auto-react, auto-threads, snipe, quote, wardrobe descriptions |
@@ -72,6 +73,7 @@ Data is not sold. It is not used for advertising.
 | Snipe | Hours, memory only |
 | Poker escrow / open casino wagers | Until the hand/round settles or crash-recovery refunds them |
 | Wardrobe try-on snapshot (colours, name, icon bytes) | Cleared on Keep, Reject, idle expiry, or restart reconcile. A thin session row (user ID + stall thread ID) can remain so the stall stays open until the stall itself ends. |
+| Wardrobe meter | Kept by calendar month (UTC). Older months can remain as a usage history until an automated wipe exists. |
 | Discord log messages | Controlled by that server’s Discord, not by us |
 
 **Kicking BARNEY does not yet automatically erase the database rows for
