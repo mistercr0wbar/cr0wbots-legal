@@ -21,13 +21,19 @@ your Discord account: https://discord.com/privacy
 ## What BARNEY stores
 
 All of this lives in a PostgreSQL database on a server the operator
-runs (Hetzner), unless noted.
+runs at **Hetzner in Germany**, unless noted. That means personal
+information **leaves Canada** and may be subject to German / EU law
+and foreign legal process. If the wardrobe is enabled, descriptions
+(and icon prompts) also go to a **language-model provider outside
+Canada** (currently Anthropic in the United States).
 
 | What | Why |
 |---|---|
 | Discord **guild (server) ID** | One settings blob per server |
 | Per-server **settings** (JSON) | Feature flags, access roles, vanity tiers, filter lists, panel templates, log-channel IDs, wardrobe hub, temp-voice hub, and similar configuration the owner set in `/admin` |
 | Discord **user IDs** tied to vanity ownership, shares, role snapshots, economy balances, poker escrow, casino round IDs, temp-voice rooms/preferences, wardrobe sessions, capacity grants | To make those features work |
+| **Wardrobe icon bytes** | Raw image data (`BYTEA`) for the previous vanity badge so a rejected try-on can restore it. Generated icons, when that phase is on, are the same kind of data. |
+| **Voice channel joins/leaves** | BARNEY watches voice-state changes in real time so temporary rooms can be created and torn down. It does not use Presence intent (online/offline/status). |
 | **Message content**, only when a feature that needs it is on | Word filter, channel rules, auto-react, auto-threads, snipe, quote, wardrobe descriptions |
 | **Snipe cache** | Recently deleted messages in a channel, **in memory only**, for a few hours, never written to the database. Dies when the process restarts. Off unless the owner enables Snipe. |
 | **Logs BARNEY posts** | Copies of events (joins, deletes, “BARNEY did X”) go into **Discord channels the owner chose**. Those copies live on Discord, not as a second archive in our database. |
@@ -49,8 +55,8 @@ message text. Presence intent is not used.
 - **Server owners / configured staff**, via the features they turned on
   (they can already see their own Discord; BARNEY does not give them a
   backdoor into other servers).
-- A **language-model provider**, only for wardrobe text, only if wardrobe
-  is enabled on that server.
+- A **language-model provider outside Canada**, only for wardrobe text
+  and icon prompts, only if wardrobe is enabled on that server.
 - **Discord**, as the platform. We send API calls to Discord to create
   roles, post panels, delete filtered messages, and so on.
 
@@ -65,7 +71,7 @@ Data is not sold. It is not used for advertising.
 | Server settings and feature rows | Until the owner asks for deletion, or until an automated wipe exists and the bot is removed from that server |
 | Snipe | Hours, memory only |
 | Poker escrow / open casino wagers | Until the hand/round settles or crash-recovery refunds them |
-| Wardrobe session snapshots | Until Keep, Reject, idle expiry, or restart reconcile |
+| Wardrobe try-on snapshot (colours, name, icon bytes) | Cleared on Keep, Reject, idle expiry, or restart reconcile. A thin session row (user ID + stall thread ID) can remain so the stall stays open until the stall itself ends. |
 | Discord log messages | Controlled by that server’s Discord, not by us |
 
 **Kicking BARNEY does not yet automatically erase the database rows for
