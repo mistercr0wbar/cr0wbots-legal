@@ -25,8 +25,8 @@ operator's personal Discord servers and communities. BARBIE is also subject to
 Discord's terms, Community Guidelines, Developer Policy and adult-content
 rules. Discord's rules control use of its platform.
 
-BARBIE's [Privacy Policy](PRIVACY.md) explains its processing of sensitive
-profile and message information.
+BARBIE's [Privacy Policy](BARBIEBOT_PRIVACY.md) explains its processing of
+sensitive profile and message information.
 
 ## 2. What BARBIE provides
 

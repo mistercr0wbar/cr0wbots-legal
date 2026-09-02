@@ -7,27 +7,26 @@ MacIsaac in Nova Scotia, Canada.
 
 BARNEY is a general-audience server-management and entertainment application.
 
-- [Privacy Policy](PRIVACY.md)
-- [Terms of Use](TERMS.md)
-- [Support](SUPPORT.md)
+- [Privacy Policy](BARNEYBOT_PRIVACY.md)
+- [Terms of Use](BARNEYBOT_TERMS.md)
+- [Support](BARNEYBOT_SUPPORT.md)
 
-The root documents cover **BARNEY only**. Their filenames remain at the root so
-existing Discord Developer Portal links continue to work.
+The documents in this directory cover **BARNEY only**.
 
 ## BARBIE — adults only
 
 BARBIE is a separate, age-restricted adult roleplay application. Its policies
 do not apply to BARNEY.
 
-- [BARBIE Privacy Policy](barbie/PRIVACY.md)
-- [BARBIE Terms of Use](barbie/TERMS.md)
-- [BARBIE Support](barbie/SUPPORT.md)
+- [BARBIE Privacy Policy](../barbie/BARBIEBOT_PRIVACY.md)
+- [BARBIE Terms of Use](../barbie/BARBIEBOT_TERMS.md)
+- [BARBIE Support](../barbie/BARBIEBOT_SUPPORT.md)
 
 ## Contact
 
 - Email: **cr0wbotsupport@gmail.com**
 - Support server: https://discord.gg/qkGVG3daZS
-- [Policy change history](CHANGELOG.md)
+- [Policy change history](../CHANGELOG.md)
 
 These documents describe the applications, not the operator's personal Discord
 servers or unrelated communities.

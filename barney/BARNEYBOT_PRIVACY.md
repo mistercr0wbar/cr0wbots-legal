@@ -304,7 +304,7 @@ here.
 ## 11. Changes
 
 Material updates will change the date at the top and be recorded in the
-[change history](CHANGELOG.md). Where applicable law requires new notice or
+[change history](../CHANGELOG.md). Where applicable law requires new notice or
 consent for a materially different collection, use or disclosure, the operator
 will provide it rather than relying only on continued use.
 

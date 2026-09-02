@@ -5,7 +5,7 @@
 **Support server:** https://discord.gg/qkGVG3daZS
 
 This page covers the **BARBIE** adult Discord application. BARNEY has a
-separate [support page](../SUPPORT.md).
+separate [support page](../barney/BARNEYBOT_SUPPORT.md).
 
 The public support server is SFW. Do not post adult profile details, sexual
 content, intimate images or private consent disputes there.

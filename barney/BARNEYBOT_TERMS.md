@@ -21,7 +21,8 @@ operator's personal Discord servers and communities. BARNEY is also subject to
 Discord's applicable terms, policies and community rules. Discord's rules
 control the use of its platform.
 
-BARNEY's [Privacy Policy](PRIVACY.md) explains its information practices.
+BARNEY's [Privacy Policy](BARNEYBOT_PRIVACY.md) explains its information
+practices.
 
 ## 2. Eligibility
 
@@ -221,7 +222,7 @@ between the user and operator concerning BARNEY.
 ## 17. Changes and contact
 
 Material changes will update the date above and the public
-[change history](CHANGELOG.md). Continued use after an effective change may
+[change history](../CHANGELOG.md). Continued use after an effective change may
 constitute acceptance where permitted, but it does not replace any notice or
 consent required by law.
 

@@ -5,7 +5,7 @@
 **Support server:** https://discord.gg/qkGVG3daZS
 
 This page covers the **BARNEY** Discord application. BARBIE has a separate
-[adult-app support page](barbie/SUPPORT.md).
+[adult-app support page](../barbie/BARBIEBOT_SUPPORT.md).
 
 ## Before contacting support
 
