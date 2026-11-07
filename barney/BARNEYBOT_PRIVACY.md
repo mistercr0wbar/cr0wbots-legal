@@ -2,7 +2,7 @@
 
 **Effective date:** 1 September 2026
 
-**Last updated:** 1 September 2026
+**Last updated:** 6 November 2026
 
 **Operator and privacy contact:** Derek MacIsaac, Nova Scotia, Canada
 
@@ -32,6 +32,9 @@ servers and messages under [Discord's Privacy Policy](https://discord.com/privac
 - Some information is stored in PostgreSQL on infrastructure hosted by Hetzner
   in Germany.
 - Deleted-message Snipe is off by default and uses a short in-memory cache.
+- In channels where voice-note transcription is enabled, an authorized
+  member can request a transcript of a posted voice note. The speaker can
+  turn transcription off across servers in User Settings.
 - Optional wardrobe requests use Anthropic for text interpretation and xAI for
   icon generation.
 - Optional Last.fm features communicate with Last.fm and can store a separate
@@ -53,10 +56,24 @@ BARNEY may process and store:
   destinations, voice hubs, wardrobe configuration and other settings chosen
   by server administrators;
 - vanity-role ownership and sharing, role-restoration snapshots, punishment
-  role vaults, temporary voice-channel ownership and preferences;
+  role vaults, temporary voice-channel ownership, entry requests and preferences;
 - moderation and recovery state such as channel locks, lockdown snapshots,
   bulk-job progress, action reasons and the users who initiated actions; and
 - service tiers, capacity grants and related administrative notes.
+
+When staff upload a welcome or farewell background, BARNEY stores a resized
+copy. It fetches the member's avatar to render a card and keeps the posted
+card in Discord. Temporary voice-room requests use the room, server,
+requester and owner IDs, request status and timing. Request and grant rows
+are removed when the room closes. A separate requester cooldown can remain
+for up to one day.
+
+Where a temporary room uses BARCHORD, BARNEY and BARCHORD coordinate room and
+player controls on the same host. They exchange the relevant Discord IDs,
+control actions, reading and player state, and track and requester information
+for the controls. BARCHORD processes eligible chat for speech under its
+[Privacy Policy](../barchord/BARCHORD_PRIVACY.md). BARNEY's separate voice-note
+transcription feature is described below.
 
 Discord IDs identify objects inside Discord. BARNEY does not receive a user's
 Discord password from Discord.
@@ -84,6 +101,7 @@ actions, content may be processed for:
 - Snipe;
 - quote cards;
 - ticket forms and transcripts;
+- reaction-requested voice-note transcription;
 - Last.fm trigger words; and
 - wardrobe descriptions.
 
@@ -93,17 +111,46 @@ Processing content does not always mean it is stored in BARNEY's database:
   of recently deleted messages in process memory. The default retention is two
   hours and the configurable maximum is twelve hours. The cache does not store
   attachment files, is not written to PostgreSQL and disappears on process
-  restart. Server administrators can choose whether Snipe responses are
+  restart. Entries can be evicted earlier when the cache reaches its channel
+  or memory limit. Server administrators can choose whether Snipe responses are
   private or public.
 - **Quote cards:** BARNEY reads selected message text and Discord-hosted avatar
   or emoji images to render a quote image. The rendered card is posted to
   Discord; BARNEY does not keep a database archive of the quoted message or
   image. A user's quote preferences can follow that user between servers and
-  direct messages.
+  direct messages. BARNEY keeps a ledger with Discord message, channel and
+  user IDs and timestamps so people can find and remove cards and so
+  configured removal rules can take effect. The ledger contains no quote text.
+- **Away notices:** If you mark yourself away, BARNEY can store the reason you
+  supply, your previous nickname and IDs and times for mentions you could
+  see. It sends the mention list when you return and clears it. The list
+  contains links to Discord messages.
 - **Logs:** Copies of events or message content selected by a server's logging
   configuration are posted to Discord channels chosen by that server. Those
   copies are stored by Discord, not as a second message archive in BARNEY's
   PostgreSQL database.
+
+### Voice-note transcription
+
+When the server enables voice-note transcription in a channel, an authorized
+member can request a transcript by pressing the reaction on a voice note.
+Eligible notes are transcribable by default. The speaker can switch off
+**Transcribe my voice notes** in `/barney` → **User Settings** → **Voice Notes**.
+This setting follows the speaker across servers. Existing transcripts can
+still remain in Discord.
+
+The transcript is posted in the source channel, where people with access to
+that channel can read it. When AssemblyAI is configured, BARNEY sends it the
+Discord recording link and glossary terms. AssemblyAI fetches the recording
+from Discord and returns the transcript. Otherwise, if the local speech
+model is available, BARNEY downloads the recording to a temporary file on
+its host, transcribes it there, and removes the temporary file. BARNEY
+processes posted voice notes for this feature.
+
+BARNEY does not archive the recording or transcript in its database. Audit
+records can identify the requester and speaker and record the action, backend,
+duration and usage. For paid transcription, BARNEY stores monthly usage
+counts by guild and requester.
 
 ### 3.4 Tickets and verification
 
@@ -163,17 +210,18 @@ privacy policies.
 
 Last.fm has two separate levels:
 
-- **Link:** `/lastfm link` stores the Last.fm username supplied by the user, an
-  optional trigger word, and cached artist play counts used for guild
+- **Link:** In `/lastfm` → **Your account**, linking stores the Last.fm username
+  you supply, an optional trigger word, and cached artist play counts used for guild
   leaderboards and crowns. BARNEY reads listening information from Last.fm but
   does not maintain a separate archive of the user's listening history.
-- **Connect:** `/lastfm connect` optionally stores a Last.fm session key that
-  allows BARNEY to love and unlove tracks on that user's behalf. This is not
+- **Connect:** The same panel lets you optionally authorize BARNEY to love and
+  unlove tracks on your behalf. BARNEY stores a Last.fm session key for this. This is not
   required for read-only Last.fm features and does not expire automatically.
 
-Running `/lastfm disconnect` deletes the username, trigger word, session key,
-cached counts and crowns held by BARNEY. Users can separately revoke access in
-their Last.fm application settings.
+Select **Delete everything** in **Your account** to remove the username,
+trigger word, session key, cached counts and crowns. You can also revoke
+access in Last.fm's application settings. A now-playing card can retain the
+artist, track and Discord message ID so its Love and Unlove controls work.
 
 ## 4. Sources of information
 
@@ -216,6 +264,8 @@ Information may be accessible to or processed by:
 - **Hetzner**, which hosts the application and PostgreSQL data in Germany.
 - **Anthropic**, for optional wardrobe text interpretation.
 - **xAI**, for optional wardrobe icon generation.
+- **AssemblyAI**, when configured, for voice-note transcription. The provider
+  handles its own copies under its [retention settings and terms](https://www.assemblyai.com/docs/data-retention-and-model-training).
 - **Last.fm**, when a user uses Last.fm features.
 - **Google/Gmail**, when a person contacts the support email address.
 - **Legal or safety authorities**, if disclosure is required by applicable law
@@ -239,7 +289,9 @@ lawful access processes of the country where it is processed.
 | Ticket records | After ticket closure until the guild's data is deleted on request. |
 | Verification ticket channel | Deleted on BARNEY's configured clock, no later than 24 hours by default and possibly sooner if configured by the guild. |
 | Verification decision | Until the member or guild requests removal. It may remain so a returning member can regain the verified role. |
-| Last.fm information | Until `/lastfm disconnect` or a valid deletion request. |
+| Last.fm account information | Until **Delete everything** in **Your account** or a valid deletion request. |
+| Voice-note opt-out | Kept while transcription of your notes is switched off, or until a valid deletion request is completed. |
+| Voice-note transcription | Local working audio is removed after processing. Posted transcripts remain on Discord under channel and Discord controls. AssemblyAI retention depends on the provider and account settings. Paid usage counts are kept by calendar month. |
 | Wardrobe working snapshot and icon bytes | Until keep, reject, idle expiry or restart reconciliation, except the minimal session row needed to keep an active stall available. |
 | Wardrobe usage meters | By calendar month. Older monthly rows can remain as usage history until deletion is requested. |
 | Discord logs, transcripts and bot messages | Controlled through Discord by the guild and Discord, not by BARNEY's PostgreSQL retention. |
@@ -254,7 +306,10 @@ unrelated new use.
 Depending on the feature, users can:
 
 - ask a guild administrator to disable an optional feature;
-- use `/lastfm disconnect` to remove all BARNEY-held Last.fm information;
+- use `/lastfm` → **Your account** → **Delete everything** to remove your linked
+  account information, authorization, cached counts and crowns;
+- switch off **Transcribe my voice notes** under `/barney` → **User Settings** →
+  **Voice Notes**;
 - delete their own personal snapshot backups;
 - change quote preferences and other user settings in BARNEY;
 - leave a server or ask its owner to remove BARNEY; and

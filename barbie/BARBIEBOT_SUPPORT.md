@@ -35,9 +35,10 @@ The operator may ask for a reasonable confirmation through Discord to prevent
 one person from requesting another person's data. Do not send government ID,
 passwords, tokens, nude images, sexual evidence or unrelated private messages.
 
-The current `profile delete` prefix action clears Bot Play and D/s opt-ins but
-does not erase the written profile. Use the email route above for permanent
-deletion until an in-app deletion command is available.
+Open `/barbie` → **User** → **My data** to download a private copy or use
+**Erase my data** and confirm. The legacy `profile delete` prefix action
+switches off Bot Play and D/s while preserving written profile fields. Email
+support if you need help with an erasure or another privacy request.
 
 ## Consent, harassment and safety reports
 

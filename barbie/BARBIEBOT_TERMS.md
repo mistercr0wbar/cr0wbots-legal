@@ -2,7 +2,7 @@
 
 **Effective date:** 1 September 2026
 
-**Last updated:** 1 September 2026
+**Last updated:** 6 November 2026
 
 **Operator:** Derek MacIsaac, Nova Scotia, Canada
 
@@ -67,9 +67,9 @@ spaces properly marked and controlled as age-restricted. Guild administrators
 must not grant BARBIE access to minors or knowingly permit minors to view or
 participate in its adult features.
 
-Application-command labels and channel checks are additional safeguards, not
-a substitute for responsible guild configuration or compliance with Discord's
-rules.
+BARBIE filters explicit media using Discord's channel setting. Guild access
+modes and roles control who can invoke features. Guild administrators are
+responsible for keeping adult content in age-restricted spaces.
 
 ## 5. Profiles, relationships and cross-guild scope
 
@@ -83,10 +83,10 @@ the Privacy Policy, these records can affect multiple guilds that use BARBIE.
 Do not create or accept a record if you do not agree to its current
 cross-guild scope.
 
-Profile visibility and trust controls reduce access but do not make Discord a
-confidential storage service. Users should not place legal names, addresses,
-government IDs, medical information or other unnecessary identifying details
-in BARBIE profiles.
+The About, Kinks and Limits pages are public profile-card pages. Anyone
+with access to the channel where a card is posted can read the displayed
+page. Leave out anything you want to keep private. Keep adult content in
+age-restricted spaces as described above.
 
 ## 6. Gags and webhook output
 
@@ -95,9 +95,10 @@ text and repost the result through a webhook displaying the member's Discord
 name and avatar. The repost is BARBIE-generated roleplay output, not an
 unaltered statement by the member.
 
-Where an ownership relationship exists, BARBIE can temporarily retain the
-original plaintext and offer an eye control to the audience permitted by the
-gag-privacy setting. Users must not use revealed text to harass, shame,
+BARBIE can temporarily retain the original text and offer an eye control
+where the gag-privacy settings allow it. Members can turn off **Keep my
+gagged words** in `/barbie` → **User** to stop retention and delete stored
+originals. Users must not use revealed text to harass, shame,
 blackmail or harm another person, or republish it outside the context in which
 they were authorized to view it.
 

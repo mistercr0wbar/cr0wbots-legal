@@ -22,6 +22,11 @@ them.
 
 ## Privacy and data requests
 
+To stop transcription of your voice notes across servers, open `/barney` →
+**User Settings** → **Voice Notes** and switch off **Transcribe my voice notes**.
+For a transcript already posted, ask the server staff to remove the Discord
+reply.
+
 Email **cr0wbotsupport@gmail.com** with a subject such as
 `BARNEY privacy request`. Include:
 

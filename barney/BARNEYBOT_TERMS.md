@@ -2,7 +2,7 @@
 
 **Effective date:** 1 September 2026
 
-**Last updated:** 1 September 2026
+**Last updated:** 6 November 2026
 
 **Operator:** Derek MacIsaac, Nova Scotia, Canada
 
@@ -41,7 +41,8 @@ BARNEY provides Discord-based tools that may include:
 - moderation, automod, anti-raid, anti-nuke, jail, lockdown and logging;
 - deleted-message Snipe;
 - temporary voice channels, vanity roles and role restoration;
-- tickets, transcripts and human-operated verification workflows;
+- tickets, ticket transcripts and human-operated verification workflows;
+- reaction-requested transcription of posted voice notes;
 - guild clones, snapshot transfers and personal backup vaults;
 - quote cards and preferences;
 - an optional play-money economy, casino games and poker;
@@ -61,6 +62,8 @@ which questions ticket forms ask. They must:
 
 - grant BARNEY only the Discord permissions they intend it to use;
 - configure capability roles and Discord role hierarchy responsibly;
+- tell members where voice-note transcription is enabled, who can request it,
+  where the result is posted and how speakers can turn it off;
 - tell members about logging, Snipe, ticket transcripts and other
   content-affecting features where appropriate;
 - avoid asking for information that is unnecessary, illegal or excessively
@@ -73,6 +76,17 @@ BARNEY's capability system does not replace Discord's permissions or role
 hierarchy. BARNEY may delete content, timeout, kick or ban members, edit roles
 or channels, and perform other consequential actions only where the relevant
 feature is enabled and Discord permits the action.
+
+### Voice-note transcription
+
+An authorized member may request a transcript in a channel where the server
+has enabled this feature. Eligible voice notes can be transcribed by default.
+Speakers can switch off **Transcribe my voice notes** in `/barney` →
+**User Settings** → **Voice Notes** at any time. The transcript appears in
+the same Discord channel as the recording. Use it for access to that channel's
+conversation and respect other people's privacy when handling or sharing it.
+The [Privacy Policy](BARNEYBOT_PRIVACY.md#voice-note-transcription) explains
+when AssemblyAI receives the recording link and glossary terms.
 
 ## 5. Tickets and verification
 
@@ -117,6 +131,10 @@ real-money gambling service. Do not attempt to create an external market for
 cr0wcaps.
 
 ## 8. Last.fm and other external services
+
+In temporary voice rooms with BARCHORD, BARNEY can show controls for that bot.
+BARCHORD handles music playback and chat reading under its own
+[Privacy Policy](../barchord/BARCHORD_PRIVACY.md).
 
 Optional Last.fm features depend on Last.fm. Linking a username does not grant
 BARNEY authority over the account. A user must separately complete the

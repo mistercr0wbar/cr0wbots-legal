@@ -2,6 +2,8 @@
 
 **Effective date:** 6 November 2026
 
+**Last updated:** 6 November 2026
+
 BARCHORD plays music and reads eligible chat aloud in private Discord servers. This
 policy covers BARCHORD and its voice worker accounts. Derek MacIsaac operates BARCHORD
 from Nova Scotia, Canada. For privacy questions or requests, email
@@ -15,12 +17,15 @@ slash command options and button actions. BARCHORD uses Discord server, channel,
 and role IDs and current voice channel membership to check permissions and direct
 playback.
 
-An authorized member can start reading with `/join` or the reading controls. A server
-can also enable autojoin when an eligible member types in their voice channel's chat.
-While reading is active, BARCHORD can read from enabled voice channel chat and from a
-designated text channel if the server has set one. It checks that the author is in the
-voice channel and honors server reading rules and the author's opt-out. It can speak
-the author's display name or chosen spoken name and use names in mentions, attachment
+An authorized member can start reading with `/read`, **Read chat**, or the
+**Reading off** control on the player strip. The strip shows **Reading on** or
+**Reading off**. Use `/join` to connect the player without starting a reading
+session. A server can also enable
+automatic reading when an eligible member types in their voice channel's chat.
+An additional text channel configured by the server can supply messages to an
+already active session. BARCHORD checks that the author is in the voice channel
+and applies server reading rules and the author's opt-out. It can speak the
+author's display name or chosen spoken name and use names in mentions, attachment
 types and sticker names to describe the message.
 
 BARCHORD synthesizes speech on its host and keeps chat text and generated speech only
@@ -28,19 +33,29 @@ in working memory. It uses its voice connection for outgoing playback to the peo
 the room. Audit records can include the author and message IDs, message length, time
 and action.
 
+The voice picker can generate a fixed sample on the host and send it as a private
+Discord attachment. For up to three minutes after generating it, you can choose
+**Hear in VC** to play the sample to people in your current voice channel.
+
 ## 2. Music requests
 
-BARCHORD sends music search terms to YouTube or SoundCloud, including some partial
-searches as you type in `/play`. When you submit a supported link, BARCHORD uses the
-public link or track identifier for lookup. Spotify supplies track and artist
+BARCHORD sends music search terms to YouTube or SoundCloud for catalogue lookup.
+When you type in `/play`, BARCHORD can also send partial search text to Google's
+YouTube autocomplete service. When you submit a supported link, BARCHORD uses
+the public link or track identifier for lookup. Spotify supplies track and artist
 information for matching. BARCHORD retrieves public audio from supported sources,
 including SoundCloud and Bandcamp. For YouTube tracks, it may send the public link
 or video ID to CNVMP3, Tunelio if configured, or Samplecut to obtain playable audio.
 
-BARCHORD stores track information, queue order, requester IDs and playback state so it
-can manage the queue and resume sessions after interruptions. Track information and the
-requester's Discord identity can appear in queue and playback panels visible to people
-with access to the channel.
+**Recent** suggestions use your server's queue and recently started tracks.
+These suggestions show track information without identifying the requester.
+BARCHORD uses a shared audio cache for playback.
+
+BARCHORD stores track information, queue order, requester IDs, voice-channel
+connection state and playback state so it can manage the player and resume
+sessions after interruptions. Queue and playback panels can show track
+information and the requester's Discord identity. The compact controls are
+posted in the voice channel's chat, and expanded controls can be opened privately.
 
 ## 3. Settings, hosting and support
 
@@ -51,10 +66,13 @@ diagnose problems and operate the bot.
 
 BARCHORD's database, logs and local backups are on infrastructure hosted by Hetzner in
 Germany. The database and its backups are restricted to operational accounts. The
-operator accesses stored records to maintain, secure and support BARCHORD. Where a
-server uses BARNEY's reading controls, the two bots exchange the relevant server,
-channel and user IDs, control actions and reading state on the same host. Discord
-handles its own copies of messages and bot posts and provides voice transport.
+operator accesses stored records to maintain, secure and support BARCHORD. In
+BARNEY temporary voice rooms, the two bots coordinate their controls over a local
+connection on the same host. They exchange server, channel, message and relevant
+user IDs, control actions, reading and player status, and track and requester
+information for playback or queue controls. BARCHORD handles chat text and
+speech synthesis. Discord handles its copies of messages, bot posts and preview
+attachments, and provides voice transport.
 [Discord Privacy Policy](https://discord.com/privacy)
 
 If you email support, Gmail processes your email address and the information you
@@ -67,6 +85,9 @@ operator may disclose information when required by law.
   cleared. A queue interrupted by a disconnect can generally be resumed for 15 minutes.
   A cleanup job clears stale saved queues after 24 hours. Some session metadata can
   remain after the queue expires.
+- **Recent suggestions.** BARCHORD keeps up to 25 distinct recently started YouTube
+  tracks per server for autocomplete. It stores the track information and when it
+  last started.
 - **Settings and audits.** Personal preferences, server settings and database audit
   records have no fixed automatic expiry. Server settings can remain after a server
   removes BARCHORD. Service logs rotate under the host's journal settings.
@@ -79,7 +100,7 @@ operator may disclose information when required by law.
 ## 5. Privacy choices and requests
 
 Your messages can be read by default when they meet the rules above. In `/barchord` →
-**You**, select **Do not read me** to stop BARCHORD from reading your messages across
+**User**, select **Do not read me** to stop BARCHORD from reading your messages across
 servers and cancel your queued or current speech. Select **Forget me** and confirm to
 remove your saved speech preferences and your Discord user ID from attribution in
 BARCHORD's live database across servers. This also resets your opt-out. Select

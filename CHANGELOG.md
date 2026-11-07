@@ -1,5 +1,15 @@
 # Policy change history
 
+## 6 November 2026
+
+- Documented BARNEY voice-note transcription, its personal opt-out, and
+  the current Last.fm account controls.
+- Updated BARBIE's profile, gag privacy, export, erasure and backup disclosures.
+- Restored the previous BARNEY policy paths as links to the current documents.
+- Updated [BARCHORD's Privacy Policy](barchord/BARCHORD_PRIVACY.md) for separate
+  join and reading controls, voice previews, server-local Recent suggestions and
+  its temporary-room integration with BARNEY.
+
 ## 1 September 2026
 
 ### BARNEY

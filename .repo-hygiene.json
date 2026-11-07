@@ -2,7 +2,9 @@
   "version": 1,
   "documents": [
     "CHANGELOG.md",
+    "PRIVACY.md",
     "README.md",
+    "TERMS.md",
     "barbie/BARBIEBOT_PRIVACY.md",
     "barbie/BARBIEBOT_README.md",
     "barbie/BARBIEBOT_SUPPORT.md",
