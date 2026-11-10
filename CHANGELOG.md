@@ -1,5 +1,11 @@
 # Policy change history
 
+## 10 November 2026
+
+- Updated BARNEY's Privacy Policy and Terms of Use for on-host voice-note
+  transcription and operator-only Wardrobe. Clarified that historical data may
+  still be subject to existing retention policies.
+
 ## 6 November 2026
 
 - Documented BARNEY voice-note transcription, its personal opt-out, and

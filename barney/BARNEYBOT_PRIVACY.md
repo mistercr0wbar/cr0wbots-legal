@@ -2,7 +2,7 @@
 
 **Effective date:** 1 September 2026
 
-**Last updated:** 6 November 2026
+**Last updated:** 10 November 2026
 
 **Operator and privacy contact:** Derek MacIsaac, Nova Scotia, Canada
 
@@ -34,9 +34,10 @@ servers and messages under [Discord's Privacy Policy](https://discord.com/privac
 - Deleted-message Snipe is off by default and uses a short in-memory cache.
 - In channels where voice-note transcription is enabled, an authorized
   member can request a transcript of a posted voice note. The speaker can
-  turn transcription off across servers in User Settings.
-- Optional wardrobe requests use Anthropic for text interpretation and xAI for
-  icon generation.
+  turn transcription off across servers in User Settings. BARNEY transcribes
+  voice notes on its host.
+- The operator-only Wardrobe applies a supplied role name, colours and optional
+  badge.
 - Optional Last.fm features communicate with Last.fm and can store a separate
   authorization if a user expressly connects one.
 - BARNEY does not sell personal information or use it for behavioral
@@ -103,7 +104,7 @@ actions, content may be processed for:
 - ticket forms and transcripts;
 - reaction-requested voice-note transcription;
 - Last.fm trigger words; and
-- wardrobe descriptions.
+- Wardrobe role settings and supplied badges.
 
 Processing content does not always mean it is stored in BARNEY's database:
 
@@ -140,17 +141,15 @@ This setting follows the speaker across servers. Existing transcripts can
 still remain in Discord.
 
 The transcript is posted in the source channel, where people with access to
-that channel can read it. When AssemblyAI is configured, BARNEY sends it the
-Discord recording link and glossary terms. AssemblyAI fetches the recording
-from Discord and returns the transcript. Otherwise, if the local speech
-model is available, BARNEY downloads the recording to a temporary file on
-its host, transcribes it there, and removes the temporary file. BARNEY
-processes posted voice notes for this feature.
+that channel can read it. For a posted voice note, BARNEY downloads the
+recording to a temporary file on its host and transcribes it there with a
+local speech model. Configured glossary terms can help the model recognise
+names and other words. BARNEY is designed to remove the temporary file after
+processing.
 
 BARNEY does not archive the recording or transcript in its database. Audit
-records can identify the requester and speaker and record the action, backend,
-duration and usage. For paid transcription, BARNEY stores monthly usage
-counts by guild and requester.
+records can identify the requester and speaker and record the action, the
+local processing method, recording duration and number of glossary terms.
 
 ### 3.4 Tickets and verification
 
@@ -191,20 +190,15 @@ snapshots do not contain message history or a member list.
 
 ### 3.6 Wardrobe
 
-When enabled by a server, the wardrobe can process:
+When the operator uses Wardrobe, BARNEY can process:
 
-- a Discord user's written description of a requested role appearance;
-- a derived role name, colors, style and optional icon prompt;
+- the supplied role name, colours, style and optional badge image;
 - the guild and user IDs involved in a wardrobe session;
 - a temporary snapshot of the role being changed, including previous icon
-  bytes where needed for restoration; and
-- monthly guild and member usage counts.
+  bytes where needed for restoration.
 
-The written description is sent to Anthropic for text interpretation. If the
-user requests an icon, a derived icon prompt is sent to xAI for image
-generation. Generated output is then sent to Discord to update the role. These
-providers may process requests outside Canada under their own terms and
-privacy policies.
+BARNEY sends the role settings and any supplied badge to Discord when applying
+them to the role.
 
 ### 3.7 Last.fm
 
@@ -231,9 +225,8 @@ BARNEY receives information:
   receive Discord events;
 - directly from users who submit commands, forms, settings, descriptions and
   support requests;
-- from server administrators who configure the application;
-- from Last.fm when a user invokes an enabled Last.fm feature; and
-- from Anthropic and xAI as output from an optional wardrobe request.
+- from server administrators who configure the application; and
+- from Last.fm when a user invokes an enabled Last.fm feature.
 
 ## 5. Purposes
 
@@ -262,10 +255,6 @@ Information may be accessible to or processed by:
 - **Discord**, as the application platform and host of messages, attachments,
   accounts and server content.
 - **Hetzner**, which hosts the application and PostgreSQL data in Germany.
-- **Anthropic**, for optional wardrobe text interpretation.
-- **xAI**, for optional wardrobe icon generation.
-- **AssemblyAI**, when configured, for voice-note transcription. The provider
-  handles its own copies under its [retention settings and terms](https://www.assemblyai.com/docs/data-retention-and-model-training).
 - **Last.fm**, when a user uses Last.fm features.
 - **Google/Gmail**, when a person contacts the support email address.
 - **Legal or safety authorities**, if disclosure is required by applicable law
@@ -274,6 +263,11 @@ Information may be accessible to or processed by:
 
 Information hosted or processed outside Canada may be subject to the laws and
 lawful access processes of the country where it is processed.
+
+BARNEY no longer sends new Wardrobe requests to Anthropic or xAI or new
+transcription requests to AssemblyAI. Any information previously sent to
+these providers remains subject to their applicable terms and retention
+policies.
 
 ## 7. Retention
 
@@ -291,9 +285,9 @@ lawful access processes of the country where it is processed.
 | Verification decision | Until the member or guild requests removal. It may remain so a returning member can regain the verified role. |
 | Last.fm account information | Until **Delete everything** in **Your account** or a valid deletion request. |
 | Voice-note opt-out | Kept while transcription of your notes is switched off, or until a valid deletion request is completed. |
-| Voice-note transcription | Local working audio is removed after processing. Posted transcripts remain on Discord under channel and Discord controls. AssemblyAI retention depends on the provider and account settings. Paid usage counts are kept by calendar month. |
+| Voice-note transcription | BARNEY is designed to remove local working audio after processing. Posted transcripts remain on Discord under channel and Discord controls. Historical paid usage counts, where present, may remain in storage. |
 | Wardrobe working snapshot and icon bytes | Until keep, reject, idle expiry or restart reconciliation, except the minimal session row needed to keep an active stall available. |
-| Wardrobe usage meters | By calendar month. Older monthly rows can remain as usage history until deletion is requested. |
+| Historical Wardrobe usage counts | Older monthly rows may remain as usage history until deletion is requested. |
 | Discord logs, transcripts and bot messages | Controlled through Discord by the guild and Discord, not by BARNEY's PostgreSQL retention. |
 | Database backups | The current job keeps 30 daily database backups and 12 first-of-month backups. Backups are restricted operational copies and age out through rotation. A deletion from the live database may remain in a backup until that backup rotates out and will not be restored for ordinary use. |
 

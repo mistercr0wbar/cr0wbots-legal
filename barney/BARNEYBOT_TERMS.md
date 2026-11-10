@@ -2,7 +2,7 @@
 
 **Effective date:** 1 September 2026
 
-**Last updated:** 6 November 2026
+**Last updated:** 10 November 2026
 
 **Operator:** Derek MacIsaac, Nova Scotia, Canada
 
@@ -85,8 +85,8 @@ Speakers can switch off **Transcribe my voice notes** in `/barney` →
 **User Settings** → **Voice Notes** at any time. The transcript appears in
 the same Discord channel as the recording. Use it for access to that channel's
 conversation and respect other people's privacy when handling or sharing it.
-The [Privacy Policy](BARNEYBOT_PRIVACY.md#voice-note-transcription) explains
-when AssemblyAI receives the recording link and glossary terms.
+The [Privacy Policy](BARNEYBOT_PRIVACY.md#voice-note-transcription) describes
+how BARNEY processes the recording on its host.
 
 ## 5. Tickets and verification
 
@@ -142,15 +142,13 @@ Last.fm authorization flow before BARNEY can love or unlove tracks for that
 user. Users can disconnect BARNEY and should also use Last.fm's own revocation
 controls when appropriate.
 
-BARNEY also depends on Discord, Hetzner and, for optional wardrobe features,
-Anthropic and xAI. Third-party services have their own terms, policies,
-availability and content rules. BARNEY does not control their decisions or
-guarantee their continued availability.
+BARNEY also depends on Discord and Hetzner. Third-party services have their
+own terms, policies, availability and content rules. BARNEY does not control
+their decisions or guarantee their continued availability.
 
-Generated wardrobe names, colors or images may be inaccurate, inappropriate
-or similar to existing material. Users and guild administrators must review
-outputs before keeping or reusing them and must not use the feature to violate
-another person's rights or Discord's rules.
+Wardrobe is limited to the operator and applies supplied role names, colours
+and optional badges. Use of those names and images must respect other people's
+rights and Discord's rules.
 
 ## 9. Acceptable use
 
