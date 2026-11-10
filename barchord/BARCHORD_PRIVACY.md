@@ -2,12 +2,12 @@
 
 **Effective date:** 6 November 2026
 
-**Last updated:** 6 November 2026
+**Last updated:** 10 November 2026
 
-BARCHORD plays music and reads eligible chat aloud in private Discord servers. This
-policy covers BARCHORD and its voice worker accounts. Derek MacIsaac operates BARCHORD
-from Nova Scotia, Canada. For privacy questions or requests, email
-**cr0wbotsupport@gmail.com**.
+BARCHORD plays music and reads eligible chat aloud in Discord servers where it
+is installed. This policy covers BARCHORD and its voice worker accounts.
+Derek MacIsaac operates BARCHORD from Nova Scotia, Canada. For privacy
+questions or requests, email **cr0wbotsupport@gmail.com**.
 
 ## 1. Discord messages and voice
 
@@ -23,15 +23,18 @@ An authorized member can start reading with `/read`, **Read chat**, or the
 session. A server can also enable
 automatic reading when an eligible member types in their voice channel's chat.
 An additional text channel configured by the server can supply messages to an
-already active session. BARCHORD checks that the author is in the voice channel
-and applies server reading rules and the author's opt-out. It can speak the
-author's display name or chosen spoken name and use names in mentions, attachment
-types and sticker names to describe the message.
+active session only if every member can read that channel and the channel has
+no age restriction. BARCHORD checks those permissions again before playback
+and discards queued or current speech from that source if it becomes restricted
+or is removed. BARCHORD checks that the author is in the voice channel and
+applies the server's reading rules and the author's opt-out. It can say the
+author's display name or chosen spoken name and describe mentions, attachment
+types and stickers.
 
-BARCHORD synthesizes speech on its host and keeps chat text and generated speech only
-in working memory. It uses its voice connection for outgoing playback to the people in
-the room. Audit records can include the author and message IDs, message length, time
-and action.
+BARCHORD synthesizes speech on its host. Text used for reading aloud and the
+generated speech stay in working memory. BARCHORD plays that audio to the
+people in the voice channel. Audit records can include the author and message
+IDs, message length, time and action.
 
 The voice picker can generate a fixed sample on the host and send it as a private
 Discord attachment. For up to three minutes after generating it, you can choose
@@ -39,13 +42,15 @@ Discord attachment. For up to three minutes after generating it, you can choose
 
 ## 2. Music requests
 
-BARCHORD sends music search terms to YouTube or SoundCloud for catalogue lookup.
-When you type in `/play`, BARCHORD can also send partial search text to Google's
+BARCHORD sends music search terms to Deezer, YouTube or SoundCloud for
+catalogue lookup, depending on the server's settings. When you type in `/play`,
+BARCHORD can also send partial search text to the selected catalogue or Google's
 YouTube autocomplete service. When you submit a supported link, BARCHORD uses
-the public link or track identifier for lookup. Spotify supplies track and artist
-information for matching. BARCHORD retrieves public audio from supported sources,
-including SoundCloud and Bandcamp. For YouTube tracks, it may send the public link
-or video ID to CNVMP3, Tunelio if configured, or Samplecut to obtain playable audio.
+the public link or track identifier for lookup. Spotify supplies track and
+artist information for matching to a playable source. BARCHORD uses Deezer
+track identifiers to retrieve audio from Deezer and also retrieves audio from
+SoundCloud and Bandcamp. For YouTube tracks, BARCHORD can send the public link
+or video ID to CNVMP3 or Samplecut to obtain playable audio.
 
 **Recent** suggestions use your server's queue and recently started tracks.
 These suggestions show track information without identifying the requester.
@@ -53,9 +58,32 @@ BARCHORD uses a shared audio cache for playback.
 
 BARCHORD stores track information, queue order, requester IDs, voice-channel
 connection state and playback state so it can manage the player and resume
-sessions after interruptions. Queue and playback panels can show track
-information and the requester's Discord identity. The compact controls are
-posted in the voice channel's chat, and expanded controls can be opened privately.
+sessions after interruptions. The submitted link or search phrase can be kept
+with a track in queue and cache metadata. Queue and playback panels can show
+track information and the requester's Discord identity. The compact controls
+are posted in the voice channel's chat, and expanded controls can be opened
+privately.
+
+### Personal audio and Last.fm
+
+BARCHORD stores your personal music volume and five-band EQ under your Discord
+user ID. For a shared session it saves who started the session and which sound
+settings it applied. Loudness measurements identify cached audio by content
+hash. Automatic voice status can display the current artist and song. BARCHORD
+saves the previous text so it can restore it after playback. Manual status
+edits take priority.
+
+You can opt in to scrobbling BARCHORD listening through your BARNEY-connected
+Last.fm account. Scrobbling is off by default. BARCHORD uses Discord server,
+channel and user IDs to ask BARNEY about consent for people in a voice room it
+serves. For opted-in listeners, BARCHORD measures the music it delivers while
+they are present in the voice channel and not deafened. It stores Discord user, server and channel
+IDs, track metadata, listening duration, original start time, a consent
+identifier and submission state. BARNEY keeps the Last.fm credentials and sends
+now-playing updates and scrobbles to the linked account. A scrobble can include
+the artist, title, duration, listening time and whether you requested the track.
+The private heart sends love or unlove actions for the displayed song on your
+linked account, independently of scrobbling. [Last.fm Privacy Policy](https://www.last.fm/legal/privacy)
 
 ## 3. Settings, hosting and support
 
@@ -91,8 +119,15 @@ operator may disclose information when required by law.
 - **Settings and audits.** Personal preferences, server settings and database audit
   records have no fixed automatic expiry. Server settings can remain after a server
   removes BARCHORD. Service logs rotate under the host's journal settings.
-- **Cached music.** Audio files are kept in a separate cache. BARCHORD evicts cached
-  files and their cache records as space is needed.
+- **Cached music.** BARCHORD keeps audio files and track metadata in a shared
+  cache and evicts them as space is needed.
+- **Last.fm listening.** Progress and queued submission records expire after
+  14 days. BARNEY removes submission receipts older than 14 days when handling
+  further submissions. Withdrawal or account erasure can remove them sooner.
+  BARCHORD removes pending local listening data when it verifies consent was
+  withdrawn. BARNEY checks consent again before a queued submission. An opaque
+  revoked consent identifier can remain after erasure to prevent an old opt-in
+  from recreating erased history. Last.fm keeps its own submitted records.
 - **Database backups.** The backup job keeps 30 daily and 12 monthly copies for
   disaster recovery. Data erased from the live database may remain in a restricted
   backup until that copy rotates out.
@@ -102,9 +137,16 @@ operator may disclose information when required by law.
 Your messages can be read by default when they meet the rules above. In `/barchord` →
 **User**, select **Do not read me** to stop BARCHORD from reading your messages across
 servers and cancel your queued or current speech. Select **Forget me** and confirm to
-remove your saved speech preferences and your Discord user ID from attribution in
+remove your saved speech/music preferences, listening checkpoints and queued
+submissions, and your Discord user ID from attribution in
 BARCHORD's live database across servers. This also resets your opt-out. Select
 **Do not read me** again afterward if you want to keep reading off.
+
+Turn **Scrobble BARCHORD listening** off in **User → Music → Last.fm** or
+BARNEY's Last.fm account settings to withdraw consent. After **Forget me**,
+turn scrobbling off and on to consent again. Use Last.fm's own controls to
+remove records already submitted there. Manage your Last.fm account connection
+separately through BARNEY's Last.fm account settings.
 
 To ask for access, a copy, correction or deletion of your data, email
 **cr0wbotsupport@gmail.com** with the subject `BARCHORD privacy request`. Include your
