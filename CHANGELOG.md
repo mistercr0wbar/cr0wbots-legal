@@ -1,5 +1,9 @@
 # Policy change history
 
+## 13 November 2026
+
+- Documented BARCHORD’s Last.fm account ownership and optional sharing with BARNEY.
+
 ## 10 November 2026
 
 - Updated BARNEY's Privacy Policy and Terms of Use for on-host voice-note

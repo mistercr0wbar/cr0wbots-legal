@@ -2,7 +2,7 @@
 
 **Effective date:** 6 November 2026
 
-**Last updated:** 10 November 2026
+**Last updated:** 13 November 2026
 
 BARCHORD plays music and reads eligible chat aloud in Discord servers where it
 is installed. This policy covers BARCHORD and its voice worker accounts.
@@ -73,17 +73,25 @@ hash. Automatic voice status can display the current artist and song. BARCHORD
 saves the previous text so it can restore it after playback. Manual status
 edits take priority.
 
-You can opt in to scrobbling BARCHORD listening through your BARNEY-connected
-Last.fm account. Scrobbling is off by default. BARCHORD uses Discord server,
-channel and user IDs to ask BARNEY about consent for people in a voice room it
-serves. For opted-in listeners, BARCHORD measures the music it delivers while
-they are present in the voice channel and not deafened. It stores Discord user, server and channel
-IDs, track metadata, listening duration, original start time, a consent
-identifier and submission state. BARNEY keeps the Last.fm credentials and sends
-now-playing updates and scrobbles to the linked account. A scrobble can include
-the artist, title, duration, listening time and whether you requested the track.
-The private heart sends love or unlove actions for the displayed song on your
-linked account, independently of scrobbling. [Last.fm Privacy Policy](https://www.last.fm/legal/privacy)
+In BARCHORD’s `/lastfm`, linking stores your Last.fm username and optional
+trigger word. BARCHORD reads listening information from Last.fm and caches
+artist counts and crowns for server boards. A posted card can retain its
+track, artist and Discord message ID so its buttons can act on the right song.
+Connecting stores a Last.fm session key so BARCHORD can love or unlove a track
+on your behalf and submit scrobbles if you separately enable that setting.
+
+Scrobbling is off by default. For opted-in listeners, BARCHORD measures music
+it delivers while they are present and not deafened. It stores Discord user,
+server and channel IDs, track metadata, listening duration, original start
+time, a consent identifier and submission state. It sends track and listening
+details to Last.fm. The private heart works independently of scrobbling.
+[Last.fm Privacy Policy](https://www.last.fm/legal/privacy)
+
+Barney is an affiliated cr0wbots bot. With **Share account info with Barney**
+enabled, BARCHORD shares your Last.fm username and linked status with Barney
+when he requests them for your settings. The setting is on by default and
+can be turned off under **Your account** at any time. BARCHORD keeps your
+authorization, trigger and listening records.
 
 ## 3. Settings, hosting and support
 
@@ -142,11 +150,11 @@ submissions, and your Discord user ID from attribution in
 BARCHORD's live database across servers. This also resets your opt-out. Select
 **Do not read me** again afterward if you want to keep reading off.
 
-Turn **Scrobble BARCHORD listening** off in **User → Music → Last.fm** or
-BARNEY's Last.fm account settings to withdraw consent. After **Forget me**,
-turn scrobbling off and on to consent again. Use Last.fm's own controls to
-remove records already submitted there. Manage your Last.fm account connection
-separately through BARNEY's Last.fm account settings.
+Use BARCHORD’s **/lastfm → Your account** to turn off scrobbling, stop
+sharing with Barney or choose **Delete everything** to remove your link,
+authorization, trigger, queued listening and cached counts and crowns. Use
+Last.fm’s application settings to revoke access and its own controls to remove
+records already submitted there.
 
 To ask for access, a copy, correction or deletion of your data, email
 **cr0wbotsupport@gmail.com** with the subject `BARCHORD privacy request`. Include your

@@ -46,7 +46,7 @@ BARNEY provides Discord-based tools that may include:
 - guild clones, snapshot transfers and personal backup vaults;
 - quote cards and preferences;
 - an optional play-money economy, casino games and poker;
-- optional Last.fm features;
+- optional display of a Last.fm account shared from BARCHORD;
 - an optional AI-assisted wardrobe for role colors, names and icons; and
 - limited user-installed and direct-message features.
 
@@ -136,11 +136,9 @@ In temporary voice rooms with BARCHORD, BARNEY can show controls for that bot.
 BARCHORD handles music playback and chat reading under its own
 [Privacy Policy](../barchord/BARCHORD_PRIVACY.md).
 
-Optional Last.fm features depend on Last.fm. Linking a username does not grant
-BARNEY authority over the account. A user must separately complete the
-Last.fm authorization flow before BARNEY can love or unlove tracks for that
-user. Users can disconnect BARNEY and should also use Last.fm's own revocation
-controls when appropriate.
+BARCHORD handles Last.fm authorization and listening features under its own
+privacy policy. BARNEY can display the username you choose to share from
+BARCHORD.
 
 BARNEY also depends on Discord and Hetzner. Third-party services have their
 own terms, policies, availability and content rules. BARNEY does not control

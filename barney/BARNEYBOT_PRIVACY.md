@@ -2,7 +2,7 @@
 
 **Effective date:** 1 September 2026
 
-**Last updated:** 10 November 2026
+**Last updated:** 13 November 2026
 
 **Operator and privacy contact:** Derek MacIsaac, Nova Scotia, Canada
 
@@ -38,8 +38,7 @@ servers and messages under [Discord's Privacy Policy](https://discord.com/privac
   voice notes on its host.
 - The operator-only Wardrobe applies a supplied role name, colours and optional
   badge.
-- Optional Last.fm features communicate with Last.fm and can store a separate
-  authorization if a user expressly connects one.
+- Optional Last.fm account sharing can display a username you share from BARCHORD.
 - BARNEY does not sell personal information or use it for behavioral
   advertising.
 - Removing BARNEY from a server does not currently erase that server's
@@ -103,7 +102,6 @@ actions, content may be processed for:
 - quote cards;
 - ticket forms and transcripts;
 - reaction-requested voice-note transcription;
-- Last.fm trigger words; and
 - Wardrobe role settings and supplied badges.
 
 Processing content does not always mean it is stored in BARNEY's database:
@@ -202,20 +200,12 @@ them to the role.
 
 ### 3.7 Last.fm
 
-Last.fm has two separate levels:
-
-- **Link:** In `/lastfm` → **Your account**, linking stores the Last.fm username
-  you supply, an optional trigger word, and cached artist play counts used for guild
-  leaderboards and crowns. BARNEY reads listening information from Last.fm but
-  does not maintain a separate archive of the user's listening history.
-- **Connect:** The same panel lets you optionally authorize BARNEY to love and
-  unlove tracks on your behalf. BARNEY stores a Last.fm session key for this. This is not
-  required for read-only Last.fm features and does not expire automatically.
-
-Select **Delete everything** in **Your account** to remove the username,
-trigger word, session key, cached counts and crowns. You can also revoke
-access in Last.fm's application settings. A now-playing card can retain the
-artist, track and Discord message ID so its Love and Unlove controls work.
+BARCHORD manages Last.fm accounts. When you choose to share with affiliated
+bot BARNEY, he can read your linked username and linked status from BARCHORD
+to display in your user settings. BARNEY does not maintain a copy of the
+linked account. Turn off **Share account info with Barney** in BARCHORD’s
+**/lastfm → Your account** to stop future lookups. Previously posted cards
+remain subject to Discord and guild controls.
 
 ## 4. Sources of information
 
@@ -226,7 +216,7 @@ BARNEY receives information:
 - directly from users who submit commands, forms, settings, descriptions and
   support requests;
 - from server administrators who configure the application; and
-- from Last.fm when a user invokes an enabled Last.fm feature.
+- from affiliated bot BARCHORD when a user chooses to share a Last.fm account summary.
 
 ## 5. Purposes
 
@@ -255,7 +245,7 @@ Information may be accessible to or processed by:
 - **Discord**, as the application platform and host of messages, attachments,
   accounts and server content.
 - **Hetzner**, which hosts the application and PostgreSQL data in Germany.
-- **Last.fm**, when a user uses Last.fm features.
+- **BARCHORD**, for a shared Last.fm account summary.
 - **Google/Gmail**, when a person contacts the support email address.
 - **Legal or safety authorities**, if disclosure is required by applicable law
   or reasonably necessary to respond to a valid legal process or an imminent
@@ -283,7 +273,7 @@ policies.
 | Ticket records | After ticket closure until the guild's data is deleted on request. |
 | Verification ticket channel | Deleted on BARNEY's configured clock, no later than 24 hours by default and possibly sooner if configured by the guild. |
 | Verification decision | Until the member or guild requests removal. It may remain so a returning member can regain the verified role. |
-| Last.fm account information | Until **Delete everything** in **Your account** or a valid deletion request. |
+| Last.fm account summary | Read on demand while sharing is enabled in BARCHORD. |
 | Voice-note opt-out | Kept while transcription of your notes is switched off, or until a valid deletion request is completed. |
 | Voice-note transcription | BARNEY is designed to remove local working audio after processing. Posted transcripts remain on Discord under channel and Discord controls. Historical paid usage counts, where present, may remain in storage. |
 | Wardrobe working snapshot and icon bytes | Until keep, reject, idle expiry or restart reconciliation, except the minimal session row needed to keep an active stall available. |
@@ -300,8 +290,7 @@ unrelated new use.
 Depending on the feature, users can:
 
 - ask a guild administrator to disable an optional feature;
-- use `/lastfm` → **Your account** → **Delete everything** to remove your linked
-  account information, authorization, cached counts and crowns;
+- use BARCHORD’s **/lastfm → Your account** to turn off sharing or delete your Last.fm link;
 - switch off **Transcribe my voice notes** under `/barney` → **User Settings** →
   **Voice Notes**;
 - delete their own personal snapshot backups;
